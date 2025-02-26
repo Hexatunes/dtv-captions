@@ -1,0 +1,16 @@
+/* a minimalist set of CSS resets */
+
+/* default to border-box */
+body {
+  background-color: #3aff33;
+  font-family: Verdana, sans-serif;
+}
+
+p {
+  background-color: #411ab1;
+  color: #ffffff;
+  position: relative;
+  top: 75%;
+  font-size: 3vw;
+  text-align: center;
+}
