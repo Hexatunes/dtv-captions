@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>DTV Captions</title>
+</head>
+<body>
+    <p id = "subtitles">
+      Not connected to server
+  </p>
+  
+  <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+
+  <script>
+    // Connect to the Glitch server
+    const socket = io('https://dtv-captions.glitch.me/');
+    
+    addEvent(document, "keypress", function (e) {
+        e = e || window.event;
+        // use e.keyCode
+      if ( e.key == "d" ) {
+        socket.emit("plus_idx")
+      }
+      if ( e.key == "a" ) {
+        socket.emit("minus_idx")
+      }
+    });
+
+    function addEvent(element, eventName, callback) {
+        if (element.addEventListener) {
+            element.addEventListener(eventName, callback, false);
+        } else if (element.attachEvent) {
+            element.attachEvent("on" + eventName, callback);
+        } else {
+            element["on" + eventName] = callback;
+        }
+    }
+    
+    
+    socket.on('update', (data) => {
+      document.getElementById("subtitles").innerHTML = data.newSubs
+    });
+  </script>
+</body>
+</html>
