@@ -30,6 +30,7 @@
         if ( e.key == "t" ) {
             var newSubs = prompt("Please paste the script here!");
             socket.emit("sendSubs", {sentSubs: newSubs});
+        }
     });
 
     function addEvent(element, eventName, callback) {
